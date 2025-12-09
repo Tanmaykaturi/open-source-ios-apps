@@ -1,4 +1,5 @@
 require_relative 'osia_helper'
+require 'shellwords'
 
 HISTORY = 'git_history'
 
@@ -9,7 +10,7 @@ h = {}
 apps.each_with_index do |a, i|
   t = a['title']
   puts "#{i + 1}/#{apps.count}. checking #{t}"
-  command = "git log --all --grep='#{t}'"
+  command = "git log --all --grep=#{Shellwords.escape(t)}"
 
   begin
     r = `#{command}`
